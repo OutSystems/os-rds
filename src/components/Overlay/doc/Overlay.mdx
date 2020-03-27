@@ -1,0 +1,47 @@
+---
+name: Overlay
+menu: Components
+---
+
+import { Playground, Props } from "docz";
+import Overlay, { Position } from "../Overlay";
+import { BasicUsage } from "./DocExamples";
+
+# Overlay
+
+This component will can be used to overlay two components.
+It is possible to define a custom position passing a class with the position or pick a base position.
+
+## How to use
+
+```javascript
+import { Overlay, OverlayPosition } from "@outsystemsui";
+
+const MyComponent = () => (
+    <Overlay position={OverlayPosition.TopLeft} overlay={**Decoration Component**}>
+        {**Component to Decorate**}
+    </Overlay>
+);
+
+export default MyComponent;
+```
+
+## Examples
+
+<BasicUsage />
+
+## Playground
+
+<Playground>
+    <Overlay
+        position={Position.TopRight}
+        overlay={<div className="usage-overlay" />}
+        overlayCentered={true}
+    >
+        <div className="usage-overlay-content"></div>
+    </Overlay>
+</Playground>
+
+## API
+
+<Props of={Overlay} />

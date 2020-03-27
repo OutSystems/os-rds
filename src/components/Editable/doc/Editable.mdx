@@ -1,0 +1,64 @@
+---
+name: Editable
+menu: Components
+---
+
+import { Playground, Props } from "docz";
+import Editable from "../Editable";
+import { UsageWithInput, UsageWithTextArea } from "./DocExamples";
+
+# Editable
+
+This component control the inline edition for the element passed as child. The element(s) passed as children only will be visible
+when are in edit mode after edition the value will be displayed by this component.
+
+## How to use
+
+```javascript
+import { Editable } from "@outsystemsui";
+
+const MyEditableInputComponent = () => {
+    const inputRef = useRef();
+    const [task, setTask] = useState("");
+
+    return (
+        <Editable
+            text={task}
+            placeholder="Write a task name"
+            childRef={inputRef}
+            type="input"
+        >
+            <input
+                ref={inputRef}
+                type="text"
+                name="task"
+                placeholder="Write a task name"
+                value={task}
+                onChange={e => setTask(e.target.value)}
+            />
+        </Editable>
+    );
+};
+
+export default MyEditableComponent;
+```
+
+## Examples
+
+### With Input
+
+<UsageWithInput />
+
+### With TextArea
+
+<UsageWithTextArea />
+
+## Playground
+
+<Playground>
+    <div></div>
+</Playground>
+
+## API
+
+<Props of={Editable} />

@@ -1,0 +1,20 @@
+.overlay-examples {
+    display: grid;
+    grid-template-columns: 32px 32px 1fr;
+    grid-gap: 10px;
+}
+
+.usage-overlay {
+    width: 10px;
+    height: 10px;
+    background-color: rgb(207, 1, 1);
+    border: 1px solid #ffffff;
+    border-radius: 1rem;
+}
+
+.usage-overlay-content {
+    width: 32px;
+    height: 32px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 0.25rem;
+}

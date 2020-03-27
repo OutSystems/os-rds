@@ -1,0 +1,45 @@
+name: Build
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout work branch
+              uses: actions/checkout@v2
+            - name: Set up enviroment
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "12.x"
+                  registry-url: "https://npm.pkg.github.com"
+                  scope: "@os-jsplopes"
+            - name: Install dependencies
+              run: npm install
+            - name: Run build
+              run: npm run build:dev
+            - name: Run Tests
+              run: npm test
+            - name: SonarCloud Scan
+              uses: sonarsource/sonarcloud-github-action@master
+              with:
+                  projectBaseDir: ./src
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            - name: Update package version to prerelase
+              run: |
+                  git config --global user.name 'os-jsplopes'
+                  git config --global user.email 'julio.lopes@outsystems.com'
+                  npm run gitlogin
+                  npm run np:prerelease
+              env:
+                  GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Publish package to Github
+              run: npm publish --tag work
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
